@@ -1,16 +1,21 @@
-import { MongoClient } from 'mongodb'
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
+import { MongoClient } from 'mongodb';
 
-dotenv.config()
+dotenv.config();
 
-const mongoClient = new MongoClient(process.env.DATABASE_URL)
+//database connection
 let db;
+const mongoClient = new MongoClient(process.env.DATABASE_URL)
 
 try {
-  await mongoClient.connect()
-  db = mongoClient.db()
+    await mongoClient.connect();
+    db = mongoClient.db()
 } catch (error) {
-  console.log('Something wrong with server')
+    console.log('Cannot connect to the server');
 }
 
-export const productCollection = db.collection("products")
+export const usersCollection = db.collection('users');
+export const sessionsCollection = db.collection('sessions');
+export const productCollection = db.collection('products');
+export const cartsCollection = db.collection('carts');
+export const ordersCollection = db.collection('orders');
