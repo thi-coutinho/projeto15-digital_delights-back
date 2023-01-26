@@ -5,6 +5,6 @@ import getAllProducts from "../controllers/ProductController.js";
 const ProductsRouter = Router()
 
 
-ProductsRouter.get("/home",getAllProducts)
+ProductsRouter.get("/",getAllProducts)
 
 export default ProductsRouter

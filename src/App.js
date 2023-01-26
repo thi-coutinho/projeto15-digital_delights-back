@@ -11,8 +11,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-app.use([AuthRoutes])
-app.use([ProductsRouter])
+app.use([AuthRoutes,ProductsRouter])
 
 
 const PORT = process.env.PORT
