@@ -1,4 +1,4 @@
-import { productCollection } from "../config/database";
+import { productCollection } from "../config/database.js";
 
 export default async function getAllProducts(req,res){
     const {limit} = req.query
