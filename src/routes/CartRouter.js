@@ -8,6 +8,6 @@ const CartRouter = Router()
 CartRouter.use(authValidation)
 CartRouter.get("/cart",getCartProducts)
 CartRouter.post("/cart",addProductToCart)
-CartRouter.delete("/cart",delProductCart)
+CartRouter.put("/cart",delProductCart)
 
 export default CartRouter
