@@ -9,3 +9,15 @@ export function ValidateSchema(schema) {
         next();
     };
 }
+
+export function ValidateSchemaParams(schema) {
+    return (req, res, next) => {
+        const { error } = schema.validate(req.params, {abortEarly: false});
+        
+        if (error) {
+            const errorMessage = error.details.map((err) => err.message);
+            return res.status(422).send(errorMessage);
+        }
+        next();
+    };
+}
