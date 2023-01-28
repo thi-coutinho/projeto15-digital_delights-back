@@ -8,6 +8,6 @@ const ProductsRouter = Router()
 
 
 ProductsRouter.get("/",getAllProducts)
-ProductsRouter.get("/:productId",ValidateSchemaParams(productIdSchema),getProductById)
+ProductsRouter.get("/product/:productId",ValidateSchemaParams(productIdSchema),getProductById)
 
 export default ProductsRouter
