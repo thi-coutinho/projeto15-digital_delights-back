@@ -1,6 +1,8 @@
 import bcrypt from 'bcrypt';
 import { usersCollection, sessionsCollection } from '../config/database.js';
-import { v4 as uuid } from "uuid";
+import {v4 as uuid} from 'uuid';
+
+
 
 
 //SignUp section
