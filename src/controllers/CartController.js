@@ -18,7 +18,7 @@ export async function addProductToCart(req,res) {
     const {productId,price} = req.body
     try {
         let cart = await cartsCollection.findOne({user_id})
-        console.log(cart)
+        console.log('CARRINHO', cart)
         if (!cart) { // se não achar carrinho cria um
             cart = await cartsCollection.insertOne({user_id,products:[{productId,price,quantity:1}]})
             res.status(201).send("Created Cart and added product")
