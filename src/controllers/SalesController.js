@@ -27,3 +27,21 @@ export async function addPaymentMethod(req, res) {
         res.status(500).send(error);
     }
 }
+
+//Checkout section
+export async function checkoutPage(req, res) {
+    const { user_id } = res.locals.session;
+    let orderInformation;
+
+    try {
+        orderInformation = await ordersCollection.findOne({"cart.user_id": user_id });
+        console.log(orderInformation);
+        if (!orderInformation) {
+            return res.status(404).send("Order not found");
+        }
+    } catch (error) {
+        return res.status(500).send(error);
+    }
+
+    return res.status(200).send(orderInformation);
+}
