@@ -54,3 +54,14 @@ export async function delProductCart(req,res){
         res.status(500).send("Something went wrong in the server")
     }
 }
+
+
+export async function emptyCart(req,res){
+    const {user_id} = res.locals.session;
+
+    try {
+        await cartsCollection.deleteOne({ user_id });
+    } catch (error) {
+        return res.status(500).send('erro no delete', error);
+    }
+}

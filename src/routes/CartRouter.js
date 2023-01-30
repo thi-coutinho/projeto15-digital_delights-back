@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {addProductToCart, delProductCart, getCartProducts} from "../controllers/CartController.js";
+import {addProductToCart, delProductCart, emptyCart, getCartProducts} from "../controllers/CartController.js";
 import { authValidation } from "../middlewares/AuthMiddleware.js";
 
 
@@ -9,5 +9,6 @@ CartRouter.use(authValidation)
 CartRouter.get("/cart",getCartProducts)
 CartRouter.post("/cart",addProductToCart)
 CartRouter.put("/cart",delProductCart)
+CartRouter.delete("/cart",emptyCart)
 
 export default CartRouter
