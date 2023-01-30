@@ -21,7 +21,7 @@ export async function addPaymentMethod(req, res) {
             }]
         };
         const order = await ordersCollection.insertOne(paymentObject);
-        await cartsCollection.deleteOne({ user_id });
+    
         return res.status(200).send(order);
     } catch (error) {
         res.status(500).send(error);
@@ -39,6 +39,7 @@ export async function checkoutPage(req, res) {
         if (!orderInformation) {
             return res.status(404).send("Order not found");
         }
+        
     } catch (error) {
         return res.status(500).send(error);
     }
