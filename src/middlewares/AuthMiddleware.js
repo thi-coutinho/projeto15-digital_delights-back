@@ -10,6 +10,7 @@ export async function authValidation(req, res, next) {
     const checkSession = await sessionsCollection.findOne({ token })
 
     if (!checkSession) return res.status(401).send("Authorization required")
+    
 
     res.locals.session = checkSession
     next()

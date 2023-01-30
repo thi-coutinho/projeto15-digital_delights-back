@@ -50,8 +50,9 @@ export async function signIn(req, res) {
         const token = uuid()
 
         await sessionsCollection.insertOne({ user_id: emailExists._id, token})
+        const nameUser = await usersCollection.findOne({ _id: emailExists._id })
 
-        return res.status(200).send({ token })
+        return res.status(200).send({ token, name: nameUser.name })
 
     } catch (err) {
         res.status(500).send(err)
