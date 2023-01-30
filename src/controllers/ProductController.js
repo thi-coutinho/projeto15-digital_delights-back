@@ -16,10 +16,8 @@ export async function getAllProducts(req,res){
 
 export async function getProductById(req,res) {
     const {productId} = req.params
-    console.log(req.params)
     try {
         const product = await productsCollection.findOne({_id: ObjectId(productId)})
-        console.log(product)
         if (!product) return res.status(404).send("Can't find product by Id.")
         res.send(product)
     } catch (error) {

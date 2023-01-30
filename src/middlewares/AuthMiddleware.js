@@ -12,7 +12,6 @@ export async function authValidation(req, res, next) {
     if (!checkSession) return res.status(401).send("Authorization required")
 
     res.locals.session = checkSession
-    console.log(checkSession)
     next()
 
   } catch (error) {

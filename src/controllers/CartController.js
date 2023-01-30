@@ -3,7 +3,6 @@ import { cartsCollection } from "../config/database.js";
 export async function getCartProducts(req,res){
     const {user_id} = res.locals.session
     try {
-        console.log(res.locals.session)
         const cart = await cartsCollection.findOne({user_id})
         const output = cart?.products || []
         res.send(output)
@@ -40,11 +39,17 @@ export async function delProductCart(req,res){
     try {
         let cart = await cartsCollection.findOne({user_id})
         const quantity = Number(cart.products.filter(p=>p.productId===productId)[0].quantity)
-        console.log(cart.products.filter(p=>p.productId===productId)[0].quantity)
-        if (!cart) {
-            res.status(404).send("Cart not found")
-        } else if (quantity>0) { // se já tiver o prod incrementa a qtd
-            const searchParams = {user_id:cart.user_id,"products.productId":productId}
+        const searchParams = {user_id:cart.user_id,"products.productId":productId}
+        
+        if (!cart) return res.status(404).send("Cart not found") 
+        
+        if (quantity===1) { // se tiver 1 qtd do prod deleta ele da array products
+            const newProductList = cart.products.filter(p=>p.productId!==productId) 
+            await cartsCollection.updateOne(searchParams,{$set:{products:newProductList}})
+            return res.status(202).send("Deleted product from cart")
+        } 
+        
+        if (quantity>1) { // se já tiver o prod incrementa a qtd
             await cartsCollection.updateOne(searchParams, {$inc:{"products.$.quantity":-1}})
             res.status(202).send("Decresed cart's product's quantity")
         } else { // se não tiver o prod adiciona
