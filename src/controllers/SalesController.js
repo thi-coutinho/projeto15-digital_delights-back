@@ -35,7 +35,6 @@ export async function checkoutPage(req, res) {
 
     try {
         orderInformation = await ordersCollection.findOne({"cart.user_id": user_id });
-        console.log(orderInformation);
         if (!orderInformation) {
             return res.status(404).send("Order not found");
         }
